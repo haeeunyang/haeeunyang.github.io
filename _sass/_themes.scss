@@ -324,10 +324,45 @@ html[data-theme-setting="light"] {
 
 // Site-local addition: scroll effects.
 // 1) Translucent navbar: content scrolling underneath shows through, blurred.
+// NYU Violet band with white text, in both light and dark mode; slightly translucent so scrolling content shows through.
 #navbar {
-  background-color: color-mix(in srgb, var(--global-bg-color) 80%, transparent) !important;
+  --navbar-band: #57068c;
+  background-color: color-mix(in srgb, var(--navbar-band) 94%, transparent) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  border-bottom: 0;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 0.15);
+}
+#navbar,
+#navbar .navbar-brand,
+#navbar .navbar-brand *,
+#navbar .nav-link,
+#navbar button,
+#navbar i {
+  color: #fff !important;
+}
+#navbar .nav-link {
+  opacity: 0.85;
+}
+#navbar .nav-link:hover {
+  opacity: 1;
+}
+#navbar .nav-item.active > .nav-link {
+  opacity: 1;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+#navbar .navbar-toggler .icon-bar {
+  background-color: #fff !important;
+}
+// Scroll progress bar sits under the band; keep it visible against the violet.
+#progress::-webkit-progress-value {
+  background-color: #b7a57a;
+}
+#progress::-moz-progress-bar {
+  background-color: #b7a57a;
 }
 
 // 2) Content fades and slides in as it scrolls into view (CSS scroll-driven animations, no JS).
