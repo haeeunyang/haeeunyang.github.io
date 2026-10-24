@@ -1,0 +1,453 @@
+/*******************************************************************************
+ * Themes
+ ******************************************************************************/
+@use "variables" as v;
+@use "sass:color";
+
+:root {
+  color-scheme: light;
+  --global-bg-color: #{v.$white-color};
+  --global-code-bg-color: #{v.$code-bg-color-light};
+  --global-text-color: #{v.$black-color};
+  --global-text-color-light: #{v.$grey-color};
+  --global-theme-color: #57068c; // NYU Violet
+  --global-hover-color: #4b2e83; // UW Spirit Purple
+  --global-hover-text-color: #{v.$white-color};
+  --global-footer-bg-color: #{v.$grey-color-dark};
+  --global-footer-text-color: #{v.$grey-color-light};
+  --global-footer-link-color: #{v.$white-color};
+  --global-distill-app-color: #{v.$grey-color};
+  --global-divider-color: rgba(0, 0, 0, 0.1);
+  --global-card-bg-color: #{v.$white-color};
+  --global-highlight-color: #{v.$red-color-dark};
+  --global-back-to-top-bg-color: rgba(
+    #{color.channel(v.$black-color, "red", v.$space: rgb)},
+    #{color.channel(v.$black-color, "green", v.$space: rgb)},
+    #{color.channel(v.$black-color, "blue", v.$space: rgb)},
+    0.4
+  );
+  --global-back-to-top-text-color: #{v.$white-color};
+  --global-newsletter-bg-color: #{v.$white-color};
+  --global-newsletter-text-color: #{v.$black-color};
+
+  --global-tip-block: #42b983;
+  --global-tip-block-bg: #e2f5ec;
+  --global-tip-block-text: #215d42;
+  --global-tip-block-title: #359469;
+  --global-warning-block: #e7c000;
+  --global-warning-block-bg: #fff8d8;
+  --global-warning-block-text: #6b5900;
+  --global-warning-block-title: #b29400;
+  --global-danger-block: #c00;
+  --global-danger-block-bg: #ffe0e0;
+  --global-danger-block-text: #600;
+  --global-danger-block-title: #c00;
+
+  #light-toggle-system {
+    display: inline-block;
+  }
+
+  #light-toggle-dark {
+    display: none;
+  }
+
+  #light-toggle-light {
+    display: none;
+  }
+
+  .only-light {
+    display: block;
+  }
+
+  .only-dark {
+    display: none;
+  }
+
+  #back-to-top {
+    color: var(--global-back-to-top-text-color);
+    background: var(--global-back-to-top-bg-color);
+    bottom: v.$back-to-top-bottom;
+    right: v.$back-to-top-right;
+    height: v.$back-to-top-height;
+    width: v.$back-to-top-width;
+    z-index: v.$back-to-top-z-index;
+  }
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --global-bg-color: #{v.$grey-color-dark};
+  --global-code-bg-color: #{v.$code-bg-color-dark};
+  --global-text-color: #{v.$grey-color-light};
+  --global-text-color-light: #{v.$grey-color};
+  --global-theme-color: #b7a57a; // UW Husky Gold (dark mode)
+  --global-hover-color: #e8e3d3; // UW Husky Gold, web tint
+  --global-hover-text-color: #{v.$white-color};
+  --global-footer-bg-color: #{v.$grey-color-light};
+  --global-footer-text-color: #{v.$grey-color-dark};
+  --global-footer-link-color: #{v.$black-color};
+  --global-distill-app-color: #{v.$grey-color-light};
+  --global-divider-color: #424246;
+  --global-card-bg-color: #{v.$grey-900};
+  --global-back-to-top-bg-color: rgba(
+    #{color.channel(v.$white-color, "red", v.$space: rgb)},
+    #{color.channel(v.$white-color, "green", v.$space: rgb)},
+    #{color.channel(v.$white-color, "blue", v.$space: rgb)},
+    0.5
+  );
+  --global-back-to-top-text-color: #{v.$black-color};
+  --global-newsletter-bg-color: #{v.$grey-color-light};
+  --global-newsletter-text-color: #{v.$grey-color-dark};
+
+  --global-tip-block: #42b983;
+  --global-tip-block-bg: #215d42;
+  --global-tip-block-text: #beffe2;
+  --global-tip-block-title: #e2f5ec;
+  --global-warning-block: #e7c000;
+  --global-warning-block-bg: #6b5900;
+  --global-warning-block-text: #fff2af;
+  --global-warning-block-title: #fff8d8;
+  --global-danger-block: #c00;
+  --global-danger-block-bg: #600;
+  --global-danger-block-text: #ffb9b9;
+  --global-danger-block-title: #ffe0e0;
+
+  .only-light {
+    display: none;
+  }
+
+  .only-dark {
+    display: block;
+  }
+}
+
+html[data-theme-setting="dark"] {
+  #light-toggle-system {
+    display: none;
+  }
+
+  #light-toggle-dark {
+    display: inline-block;
+  }
+
+  #light-toggle-light {
+    display: none;
+  }
+
+  #back-to-top {
+    color: var(--global-back-to-top-text-color);
+    background: var(--global-back-to-top-bg-color);
+  }
+}
+
+html[data-theme-setting="light"] {
+  #light-toggle-system {
+    display: none;
+  }
+
+  #light-toggle-dark {
+    display: none;
+  }
+
+  #light-toggle-light {
+    display: inline-block;
+  }
+}
+
+.fa-half-sun-moon {
+  position: relative;
+  display: inline-block;
+
+  --fa-font: var(--fa-font-solid);
+  speak: none;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  width: 1em;
+  height: 1em;
+}
+
+.fa-half-sun-moon::before,
+.fa-half-sun-moon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  top: -0.5px;
+  bottom: -0.5px;
+  text-align: center;
+  line-height: 1em;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  font: var(--fa-font);
+}
+
+/* Left half: MOON */
+.fa-half-sun-moon::before {
+  content: "\f111";
+  color: var(--global-text-color);
+  clip-path: polygon(0 0, calc(50% - 0.5px) 0, calc(50% - 0.5px) 100%, 0 100%);
+}
+
+/* Right half: SUN */
+.fa-half-sun-moon::after {
+  content: "\f185";
+  color: var(--global-text-color);
+  clip-path: polygon(calc(50% + 0.5px) 0, 100% 0, 100% 100%, calc(50% + 0.5px) 100%);
+  right: -1.5px; /* slight overflow to avoid right-edge clipping */
+  transform: translateX(-1px); /* visually re-center the sun half */
+}
+
+#light-toggle:hover .fa-half-sun-moon::before {
+  color: var(--global-theme-color);
+}
+
+#light-toggle:hover .fa-half-sun-moon::after {
+  color: var(--global-theme-color);
+}
+
+// Site-local addition: fill the Abstract button with the theme color while its abstract is open.
+.publications .links:has(~ div.abstract.open) a.abstract {
+  background-color: var(--global-theme-color);
+  border-color: var(--global-theme-color);
+  color: var(--global-bg-color) !important;
+}
+
+// Site-local addition: CV page buttons.
+.cv-actions .btn {
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--global-theme-color);
+  color: var(--global-theme-color);
+}
+.cv-actions .cv-download {
+  background-color: var(--global-theme-color);
+  color: var(--global-bg-color) !important;
+}
+
+// Site-local addition: About page section headings in title case, compact education list.
+.post h2 {
+  text-transform: capitalize;
+}
+.about-education {
+  padding-left: 1.2rem;
+}
+.about-education li + li {
+  margin-top: 0.35rem;
+}
+.about-education-year {
+  color: var(--global-text-color-light);
+  white-space: nowrap;
+}
+
+// Site-local fix: CV-style entries render as list items, which left a stray bullet next to each date badge.
+.cv .list-group-item {
+  list-style: none;
+}
+
+// Site-local addition: research interests as boxed tags under the bio.
+.research-interests {
+  margin: 1.25rem 0 2rem;
+}
+.research-interests-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--global-theme-color);
+}
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.interest-tags li {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--global-theme-color);
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--global-theme-color) 8%, transparent);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+// Site-local addition: smaller profile photo (about the height of the bio) with contact buttons under it.
+.post .profile {
+  width: 13rem;
+}
+.post .profile .more-info {
+  font-family: inherit;
+}
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+.profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--global-theme-color);
+  border-radius: 6px;
+  color: var(--global-theme-color) !important;
+  font-size: 0.85rem;
+  text-decoration: none !important;
+}
+.profile-btn:hover {
+  background-color: var(--global-theme-color);
+  color: var(--global-bg-color) !important;
+}
+// Lift the photo to the top of the name block on wide screens (the header above is two short lines).
+@media (min-width: 992px) {
+  .post .profile.float-right {
+    margin-top: -6rem;
+  }
+}
+// On phones, stack the photo above the bio instead of squeezing the text beside it.
+@media (max-width: 575.98px) {
+  .post .profile.float-right {
+    float: none !important;
+    width: 100%;
+    margin: 0 0 1.5rem;
+  }
+  .post .profile figure {
+    max-width: 11rem;
+    margin: 0 auto 1rem;
+  }
+}
+
+// Site-local addition: scroll effects.
+// 1) Translucent navbar: content scrolling underneath shows through, blurred.
+#navbar {
+  background-color: color-mix(in srgb, var(--global-bg-color) 80%, transparent) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+// 2) Content fades and slides in as it scrolls into view (CSS scroll-driven animations, no JS).
+//    Browsers without support, and visitors who prefer reduced motion, simply see the content as is.
+@keyframes reveal-in {
+  // opacity + transform only: both are cheap to animate (no per-frame blur repaint).
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .post article > p,
+    .research-interests,
+    .post h2,
+    .news tr,
+    .publications ol.bibliography > li,
+    .cv .card,
+    .cv-actions,
+    .cv-pdf {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+// Site-local addition: Research page sections and the hand-written presentations list.
+.research-section {
+  margin-top: 2.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+.post article > .research-section:first-of-type {
+  margin-top: 0.5rem;
+}
+.presentations {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.presentations li + li {
+  margin-top: 1rem;
+}
+.presentations p {
+  margin: 0;
+}
+.presentation-title {
+  font-weight: 500;
+}
+.presentation-venue {
+  color: var(--global-text-color-light);
+}
+// Highlight my name like the theme does in publication author lists.
+.presentation-authors em {
+  font-style: normal;
+  border-bottom: 1px solid;
+}
+
+// Site-local addition: more breathing room across all pages.
+body {
+  line-height: 1.7;
+}
+.post article p {
+  margin-bottom: 1.1rem;
+}
+.post h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+}
+.post-header {
+  margin-bottom: 2rem;
+}
+.publications ol.bibliography > li {
+  margin-bottom: 2.25rem;
+}
+.publications .links {
+  margin-top: 0.6rem;
+}
+.research-section {
+  margin-top: 3.5rem;
+}
+.presentations li + li {
+  margin-top: 1.5rem;
+}
+.cv .card {
+  margin-top: 1.75rem !important;
+  padding: 1.5rem !important;
+}
+.cv .list-group-item + .list-group-item {
+  margin-top: 0.75rem;
+}
+.news td,
+.news th {
+  padding-top: 0.6rem !important;
+  padding-bottom: 0.6rem !important;
+}
+.research-interests {
+  margin-bottom: 2.5rem;
+}
+main.container,
+div.container.mt-5 {
+  padding-bottom: 1.5rem;
+}
+// Footer as a light bar right after the content (not pinned to the screen).
+footer.sticky-bottom {
+  margin-top: 2.5rem !important;
+  padding: 1rem 0 !important;
+  border-top: 1px solid var(--global-divider-color);
+  background-color: color-mix(in srgb, var(--global-text-color) 4%, var(--global-bg-color));
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
+  text-align: center;
+}
+// Keep the lines of one presentation together (overrides the general paragraph spacing above).
+.post article .presentations p {
+  margin-bottom: 0.15rem;
+}

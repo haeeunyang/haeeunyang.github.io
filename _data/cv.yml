@@ -1,0 +1,100 @@
+cv:
+  name: Haeeun Yang
+  label: M.S. Student in Management Information Systems
+  email: yanghe@snu.ac.kr
+  image: ""
+
+  social_networks:
+    - network: GitHub
+      username: haeeeeuni
+
+  sections:
+    Education:
+      - institution: Seoul National University, Graduate School of Business
+        location: Seoul, Korea
+        area: Management Information Systems
+        studyType: M.S.
+        start_date: 2025-03
+        end_date: 2027-02
+        highlights:
+          - "Advisor: Prof. Wooje Cho"
+          - Expected February 2027
+
+      - institution: Sookmyung Women's University
+        location: Seoul, Korea
+        area: Software Convergence & Business Administration (Double Major)
+        studyType: B.E. & B.B.A.
+        start_date: 2019-03
+        end_date: 2024-08
+        highlights:
+          - Graduated with Honors for Academic Excellence
+
+      - institution: University of Bern
+        location: Bern, Switzerland
+        area: Computer Science
+        studyType: Exchange Student
+        start_date: 2022-09
+        end_date: 2023-02
+
+    Experience:
+      - company: Seoul National University
+        position: Research Assistant (Prof. Wooje Cho)
+        start_date: 2025-11
+        end_date: 2026-04
+        highlights:
+          - Matched patent assignee records to firm names using large language models (LLMs).
+
+      - company: Seoul National University
+        position: Research Assistant (Prof. Taewoo Lee)
+        start_date: 2025-03
+        end_date: 2026-02
+        highlights:
+          - Supported a project on where to deploy AI-based medical devices to improve healthcare access for medically underserved populations.
+          - Collected and preprocessed public health data, including HIRA disease statistics and the Korea Community Health Survey (KCHS).
+          - Created data visualizations to explore regional patterns in healthcare access and health outcomes.
+
+      - company: Seoul National University
+        position: Teaching Assistant, Management Information Systems (Undergraduate)
+        start_date: 2025-03
+        end_date: 2026-06
+        summary: Spring 2025, Fall 2025, Spring 2026
+        highlights:
+          - Served as lab TA for hands-on HTML and MySQL sessions, guiding students through web page and database exercises.
+
+      - company: Seoul National University
+        position: Teaching Assistant, Synergy Management and Network Analysis (Executive MBA)
+        date: 2025-12 # Fall 2025
+        summary: Fall 2025
+
+    Projects:
+      - name: Camera Pose Regression with Deep Learning
+        summary: Sookmyung Women's University
+        date: 2024-06 # Mar–Jun 2024
+
+      - name: Data Visualization Competition (SM-Data)
+        summary: Sookmyung Women's University · Excellence Prize
+        date: 2024-05 # Apr–May 2024
+
+    Awards:
+      - title: Graduation Honors for Academic Excellence
+        date: 2024-08
+        awarder: Sookmyung Women's University
+
+      - title: Excellence Prize, Data Visualization Competition
+        date: 2024-05
+        awarder: Sookmyung Women's University
+
+      - title: Full-Tuition Merit Scholarship
+        date: 2023-09
+        awarder: Sookmyung Women's University
+
+      - title: Dean's List — Spring 2023 (Highest Honors), Fall 2023
+        date: 2023-12
+        awarder: Sookmyung Women's University
+
+    Languages:
+      - name: Korean
+        summary: Native
+
+      - name: English
+        summary: Fluent
