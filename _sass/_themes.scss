@@ -939,3 +939,11 @@ body {
     grid-template-columns: 1fr;
   }
 }
+// Square word-cloud images: keep them from growing taller than the wide figures.
+.project-figures .project-figure img[src*="wordcloud"] {
+  max-height: 22rem;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #fff;
+}

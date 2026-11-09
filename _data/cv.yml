@@ -108,6 +108,22 @@ cv:
         period: Apr–May 2024
         highlights:
           - Built a word-cloud system linking students' coursework to employment outcomes.
+        details: >-
+          Using the university's curriculum data (2020–2023) and graduate employment data (2016–2021), the project
+          linked each course to the major competencies listed in the curriculum, extracted the nouns from those
+          competency descriptions with KoNLPy, and turned the competencies of the courses a graduate took into a word
+          cloud. Given a student ID, the tool draws that graduate's word cloud, so one can see at a glance how their
+          coursework relates to the job they took.
+        figures:
+          - src: /assets/img/projects/course-career-wordcloud-it.png
+            caption: "Graduate in AI engineering, hired in information and communications: software, development, systems, data (keywords in Korean)."
+            alt: Korean word cloud dominated by words meaning ability, development, application, software, system and data.
+          - src: /assets/img/projects/course-career-wordcloud-finance.png
+            caption: "Graduate in German language and culture, hired in finance: financial statements, firms, analysis alongside language and culture (keywords in Korean)."
+            alt: Korean word cloud with words meaning communication, German, culture, analysis, financial statements and firm.
+        links:
+          - label: Code
+            url: https://github.com/haeeeeuni/sm_data/blob/main/sm_data_SNOWBALL.ipynb
 
     Awards:
       - title: Graduation Honors for Academic Excellence
