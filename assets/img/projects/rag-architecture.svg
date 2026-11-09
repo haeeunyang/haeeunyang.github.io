@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 364" width="960" height="364" role="img" aria-labelledby="t d">
+  <title id="t">RAG-Based Engineering Q&amp;A Assistant: system overview</title>
+  <desc id="d">Indexing: documents are chunked and embedded into PostgreSQL with pgvector and pg_trgm. Answering: a Korean or English question goes through hybrid retrieval fused with RRF, an LLM answers with a calculation tool, output checks verify numbers and mask sensitive terms, and the answer is returned with cited sources.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b5b66"/>
+    </marker>
+    <style>
+      .bg { fill: #ffffff; }
+      .lane { font: 600 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: 0.12em; fill: #57068c; }
+      .box { fill: #f7f3fb; stroke: #57068c; stroke-width: 1.5; }
+      .box-strong { fill: #57068c; stroke: #57068c; stroke-width: 1.5; }
+      .h { font: 600 15px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #1f1f24; }
+      .s { font: 400 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4a4a55; }
+      .h-inv { font: 600 15px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #ffffff; }
+      .s-inv { font: 400 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #efe6f7; }
+      .flow { stroke: #5b5b66; stroke-width: 1.6; fill: none; }
+      .divider { stroke: #e3dfe8; stroke-width: 1; stroke-dasharray: 4 4; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="364" rx="14"/>
+
+  <!-- Indexing (offline) -->
+  <text class="lane" x="24" y="36">INDEXING</text>
+
+  <rect class="box" x="40" y="54" width="200" height="78" rx="10"/>
+  <text class="h" x="140" y="82" text-anchor="middle">Documents</text>
+  <text class="s" x="140" y="102" text-anchor="middle">PDF manuals &amp; reports</text>
+  <text class="s" x="140" y="119" text-anchor="middle">Korean · English</text>
+
+  <rect class="box" x="380" y="54" width="200" height="78" rx="10"/>
+  <text class="h" x="480" y="82" text-anchor="middle">Chunk &amp; embed</text>
+  <text class="s" x="480" y="102" text-anchor="middle">section-aware chunks</text>
+  <text class="s" x="480" y="119" text-anchor="middle">multilingual embeddings</text>
+
+  <rect class="box" x="720" y="54" width="200" height="78" rx="10"/>
+  <text class="h" x="820" y="82" text-anchor="middle">PostgreSQL</text>
+  <text class="s" x="820" y="102" text-anchor="middle">pgvector (semantic)</text>
+  <text class="s" x="820" y="119" text-anchor="middle">pg_trgm (keyword)</text>
+
+  <path class="flow" d="M240,93 L376,93" marker-end="url(#arrow)"/>
+  <path class="flow" d="M580,93 L716,93" marker-end="url(#arrow)"/>
+
+  <line class="divider" x1="24" y1="176" x2="936" y2="176"/>
+
+  <!-- Answering (online) -->
+  <text class="lane" x="24" y="206">ANSWERING</text>
+
+  <rect class="box" x="20" y="262" width="156" height="78" rx="10"/>
+  <text class="h" x="98" y="295" text-anchor="middle">Question</text>
+  <text class="s" x="98" y="315" text-anchor="middle">Korean or English</text>
+
+  <rect class="box" x="206" y="262" width="164" height="78" rx="10"/>
+  <text class="h" x="288" y="290" text-anchor="middle">Hybrid retrieval</text>
+  <text class="s" x="288" y="310" text-anchor="middle">vector + keyword</text>
+  <text class="s" x="288" y="327" text-anchor="middle">fused with RRF</text>
+
+  <rect class="box" x="400" y="262" width="164" height="78" rx="10"/>
+  <text class="h" x="482" y="290" text-anchor="middle">LLM answer</text>
+  <text class="s" x="482" y="310" text-anchor="middle">Claude · GPT · Gemini</text>
+  <text class="s" x="482" y="327" text-anchor="middle">+ calculation tool</text>
+
+  <rect class="box" x="594" y="262" width="164" height="78" rx="10"/>
+  <text class="h" x="676" y="290" text-anchor="middle">Output checks</text>
+  <text class="s" x="676" y="310" text-anchor="middle">numeric grounding</text>
+  <text class="s" x="676" y="327" text-anchor="middle">sensitive-term masking</text>
+
+  <rect class="box-strong" x="788" y="262" width="152" height="78" rx="10"/>
+  <text class="h-inv" x="864" y="295" text-anchor="middle">Answer</text>
+  <text class="s-inv" x="864" y="315" text-anchor="middle">with cited sources</text>
+
+  <path class="flow" d="M176,301 L202,301" marker-end="url(#arrow)"/>
+  <path class="flow" d="M370,301 L396,301" marker-end="url(#arrow)"/>
+  <path class="flow" d="M564,301 L590,301" marker-end="url(#arrow)"/>
+  <path class="flow" d="M758,301 L784,301" marker-end="url(#arrow)"/>
+
+  <!-- Index feeds retrieval -->
+  <path class="flow" d="M820,132 L820,230 L288,230 L288,258" marker-end="url(#arrow)"/>
+  <text class="s" x="560" y="224" text-anchor="middle">top-k passages</text>
+</svg>
