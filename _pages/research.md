@@ -23,9 +23,9 @@ nav_order: 2
 <h2 class="research-section">Conference Presentations</h2>
 <ul class="presentations">
   <li>
-    <p class="presentation-title">What Flows Matters: The Data Content of Strategic Alliances and Firms' Data Breach Risk</p>
+    <p class="presentation-title">When Do Strategic Alliances Matter for Firms' Data Breach Risk? The Role of R&amp;D Alliances</p>
     <p class="presentation-authors"><em>H. Yang</em> and W. Cho</p>
-    <p class="presentation-venue"><em>Workshop on e-Business (WeB 2026)</em>, Lisbon, Portugal · Dec 2026 (upcoming)</p>
+    <p class="presentation-venue"><em>Workshop on e-Business (WeB 2026)</em>, Work-in-Progress Track, Lisbon, Portugal · Dec 2026 (upcoming)</p>
   </li>
   <li>
     <p class="presentation-title">Inter-App Dynamics: A VAR Analysis of OTT and SNS Effects on Shopping App Usage</p>

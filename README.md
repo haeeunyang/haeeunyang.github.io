@@ -28,7 +28,8 @@ docker compose up -d   # then open http://localhost:8080
 
 These shadow files from the al-folio gems; check them when upgrading the theme.
 
-- `_sass/_themes.scss` — school colors and all site-specific styles
+- `_sass/_themes.scss` — theme colors and all site-specific styles
 - `assets/js/theme.js` — light/dark toggle without the "system" mode
 - `_layouts/bib.liquid` — "Abstract" button label and keywords line
 - `_includes/news.liquid` — month-year dates in the news list
+- `_includes/header.liquid` — shows the name in the navbar on the home page too

@@ -209,6 +209,10 @@
         {{ entry.keywords | split: ',' | join: ' · ' }}
       </div>
     {% endif %}
+    {% if entry.description %}
+      <!-- Site-local addition: one-sentence summary (used for working papers without a public abstract) -->
+      <div class="paper-description">{{ entry.description }}</div>
+    {% endif %}
 
     <!-- Links/Buttons -->
     <div class="links">

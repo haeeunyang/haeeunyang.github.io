@@ -10,8 +10,8 @@
   --global-code-bg-color: #{v.$code-bg-color-light};
   --global-text-color: #{v.$black-color};
   --global-text-color-light: #{v.$grey-color};
-  --global-theme-color: #57068c; // NYU Violet
-  --global-hover-color: #4b2e83; // UW Spirit Purple
+  --global-theme-color: #57068c; // violet
+  --global-hover-color: #4b2e83; // deep purple
   --global-hover-text-color: #{v.$white-color};
   --global-footer-bg-color: #{v.$grey-color-dark};
   --global-footer-text-color: #{v.$grey-color-light};
@@ -80,8 +80,8 @@ html[data-theme="dark"] {
   --global-code-bg-color: #{v.$code-bg-color-dark};
   --global-text-color: #{v.$grey-color-light};
   --global-text-color-light: #{v.$grey-color};
-  --global-theme-color: #b7a57a; // UW Husky Gold (dark mode)
-  --global-hover-color: #e8e3d3; // UW Husky Gold, web tint
+  --global-theme-color: #b7a57a; // muted gold (dark mode)
+  --global-hover-color: #e8e3d3; // light gold tint
   --global-hover-text-color: #{v.$white-color};
   --global-footer-bg-color: #{v.$grey-color-light};
   --global-footer-text-color: #{v.$grey-color-dark};
@@ -276,7 +276,7 @@ html[data-theme-setting="light"] {
 
 // Site-local addition: smaller profile photo (about the height of the bio) with contact buttons under it.
 .post .profile {
-  width: 13rem;
+  width: 16rem;
 }
 .post .profile .more-info {
   font-family: inherit;
@@ -303,12 +303,7 @@ html[data-theme-setting="light"] {
   background-color: var(--global-theme-color);
   color: var(--global-bg-color) !important;
 }
-// Lift the photo to the top of the name block on wide screens (the header above is two short lines).
-@media (min-width: 992px) {
-  .post .profile.float-right {
-    margin-top: -6rem;
-  }
-}
+// Photo position on wide screens: centered on the bio by the script at the end of _pages/about.md.
 // On phones, stack the photo above the bio instead of squeezing the text beside it.
 @media (max-width: 575.98px) {
   .post .profile.float-right {
@@ -317,19 +312,17 @@ html[data-theme-setting="light"] {
     margin: 0 0 1.5rem;
   }
   .post .profile figure {
-    max-width: 11rem;
+    max-width: 13.5rem;
     margin: 0 auto 1rem;
   }
 }
 
 // Site-local addition: scroll effects.
 // 1) Translucent navbar: content scrolling underneath shows through, blurred.
-// NYU Violet band with white text, in both light and dark mode; slightly translucent so scrolling content shows through.
+// Violet band with white text, in both light and dark mode.
 #navbar {
   --navbar-band: #57068c;
-  background-color: color-mix(in srgb, var(--navbar-band) 94%, transparent) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: var(--navbar-band) !important; // opaque, so the page behind does not tint it
   border-bottom: 0;
   box-shadow: 0 1px 6px rgb(0 0 0 / 0.15);
 }
@@ -485,4 +478,464 @@ footer.sticky-bottom {
 // Keep the lines of one presentation together (overrides the general paragraph spacing above).
 .post article .presentations p {
   margin-bottom: 0.15rem;
+}
+
+// Research interests as boxes with a title and one-line description (2 columns, 1 on phones).
+.interest-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 575.98px) {
+  .interest-cards {
+    grid-template-columns: 1fr;
+  }
+}
+.interest-cards li {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--global-theme-color);
+  border-left-width: 4px;
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--global-theme-color) 6%, transparent);
+}
+.interest-cards strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+.interest-cards span {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--global-text-color-light);
+}
+.coursework-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+}
+
+// =============================================================================
+// Redesign (Nov 2026): one calm academic style across pages.
+// Lists instead of shadowed cards, dates as quiet text on the right, serif headings,
+// violet kept for the top band and links.
+// =============================================================================
+
+$serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+
+// Typography: regular-weight body text, serif headings.
+body {
+  font-weight: 400;
+}
+.post-title,
+.post h2,
+.cv h3.card-title {
+  font-family: $serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.post-header .post-title {
+  font-size: 2.25rem;
+}
+.post h2,
+.cv h3.card-title,
+.research-section {
+  font-size: 1.5rem;
+}
+// About page name: serif, the first name no longer heavy.
+.post-header .post-title .font-weight-bold {
+  font-weight: 600 !important;
+}
+.cv .font-weight-light,
+.cv .card-text {
+  font-weight: 400 !important;
+}
+
+// Section blocks: no card chrome, a title with a thin rule under it.
+.cv .card {
+  margin-top: 2.75rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+.cv .card:first-child {
+  margin-top: 0.5rem !important;
+}
+.cv h3.card-title {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+// Entries: content on the left, date on the right as plain muted text.
+.cv .list-group-item {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+.cv .list-group-item + .list-group-item {
+  margin-top: 1.5rem !important;
+}
+.cv .list-group-item > .row {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  margin: 0;
+}
+.cv .list-group-item > .row > div {
+  padding: 0;
+  margin: 0 !important;
+}
+.cv .list-group-item > .row > .date-column,
+.cv .list-group-item > .row > div:first-child {
+  flex: 0 0 auto;
+  max-width: none;
+  width: auto;
+  text-align: right;
+}
+.cv .list-group-item > .row > div:last-child {
+  flex: 1 1 auto;
+  max-width: none;
+  width: auto;
+  min-width: 0;
+}
+.cv .table-cv,
+.cv .table-cv td,
+.cv .table-cv tr {
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+.cv .badge {
+  min-width: 0 !important;
+  padding: 0;
+  background: transparent !important;
+  color: var(--global-text-color-light) !important;
+  font-size: 0.9rem;
+  font-weight: 400 !important;
+  text-transform: none;
+  white-space: nowrap;
+}
+.cv .location {
+  margin: 0.1rem 0 0;
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+  white-space: nowrap;
+}
+.cv .location .iconlocation {
+  display: none;
+}
+.cv h6 {
+  margin-left: 0 !important;
+  margin-bottom: 0.15rem;
+}
+.cv h6.title {
+  font-size: 1.05rem;
+  font-weight: 600 !important;
+}
+.cv ul.items {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+}
+.cv ul.items li {
+  list-style: disc;
+  color: var(--global-text-color);
+}
+.cv ul.items li + li {
+  margin-top: 0.2rem;
+}
+
+// Phones: date on its own line above the entry.
+@media (max-width: 575.98px) {
+  .cv .list-group-item > .row {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .cv .list-group-item > .row > .date-column,
+  .cv .list-group-item > .row > div:first-child {
+    text-align: left;
+  }
+  .cv .location {
+    display: inline;
+    margin-left: 0.5rem;
+  }
+}
+
+// Research interests: light boxes, no tint or heavy left bar.
+.interest-cards li {
+  border: 1px solid var(--global-divider-color);
+  border-left-width: 1px;
+  background: transparent;
+}
+.interest-cards strong {
+  color: var(--global-theme-color);
+}
+
+// Research page: the page title and the section titles no longer compete.
+.post article > .research-section:first-of-type {
+  margin-top: 0;
+}
+.publications .title {
+  font-weight: 600;
+}
+// Stronger overrides for theme rules that out-rank the ones above.
+.cv .card .list-group-item .badge.badge {
+  background-color: transparent !important;
+  color: var(--global-text-color-light) !important;
+}
+.cv .card.card {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.cv ul.list-group {
+  margin: 0;
+  padding-left: 0 !important;
+}
+.cv .list-group-item h6[class] {
+  margin-left: 0 !important;
+}
+.cv .list-group-item > .row > div > table {
+  margin-left: auto;
+}
+// The theme's utility classes (p-3, ml-md-4, mt-3) live in a CSS cascade layer, and layered !important
+// beats unlayered !important, so their spacing is cancelled with properties they do not set.
+.cv .card.card {
+  margin-left: -1rem !important;   // cancels p-3's 1rem side padding
+  margin-right: -1rem !important;
+}
+@media (min-width: 768px) {
+  .cv .list-group-item .ml-md-4 {
+    translate: -1.5rem 0;          // cancels ml-md-4 (1.5rem) so titles and summaries line up with bullets and projects
+  }
+}
+@media (max-width: 575.98px) {
+  .cv .list-group-item > .row > div:first-child,
+  .cv .list-group-item > .row > div:first-child td {
+    text-align: left !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .cv .card.card {
+    margin-left: -15px !important;  // phone container padding is 15px; avoids a 1px horizontal scroll
+    margin-right: -15px !important;
+  }
+  .cv .list-group-item > .row > div:first-child > table {
+    margin-left: 0;                  // date on its own line, left-aligned
+  }
+}
+// The theme's .date-column sits 15px short of the right edge (education, experience); line it up with awards.
+.cv .list-group-item > .row > .date-column {
+  translate: 15px 0;
+}
+@media (max-width: 575.98px) {
+  .cv .list-group-item > .row > div:first-child:not(.date-column) {
+    translate: 0 0;
+  }
+}
+// Keep news dates on one line ("Dec 2026"), also on phones.
+.news th {
+  white-space: nowrap;
+  padding-right: 1rem !important;
+}
+// About: "Research Interests" as a full section heading, same as "News".
+.research-interests .research-interests-title {
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+}
+
+// Readability: darker secondary text in the interest boxes, tighter news date column.
+.interest-cards span {
+  color: color-mix(in srgb, var(--global-text-color) 75%, var(--global-bg-color));
+}
+.news th {
+  width: 7.5rem !important;
+}
+
+// Abstract box: solid border instead of the theme's dashed one; one-line paper summaries.
+.publications ol.bibliography li div.abstract.hidden {
+  border-style: solid;
+  border-radius: 6px;
+}
+.publications ol.bibliography li div.abstract.hidden.open {
+  border: 1px solid color-mix(in srgb, var(--global-text-color) 30%, transparent) !important;
+}
+.paper-description {
+  margin-top: 0.35rem;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--global-text-color) 80%, var(--global-bg-color));
+}
+
+// Experience: projects; ones with an image or details expand below when the title is clicked.
+.projects-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.projects-list > .project + .project {
+  margin-top: 1.75rem;
+}
+.project-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+.project-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--global-text-color);
+}
+.project-date {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  color: var(--global-text-color-light);
+}
+.project-toggle {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0 0 0 -1.55rem;           // chevron hangs in the left margin (inside the open panel) so titles stay aligned
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.project-toggle:hover .project-title,
+.project-toggle:focus-visible .project-title {
+  color: var(--global-theme-color);
+}
+.project-chevron {
+  width: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--global-theme-color);
+  transition: transform 0.2s ease;
+}
+.project-toggle[aria-expanded="true"] .project-chevron {
+  transform: rotate(90deg);
+}
+.post article .project-org {
+  margin: 0.15rem 0 0;
+}
+// Smooth open/close: grid rows animate from 0fr to 1fr.
+.project-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.project.is-open .project-detail {
+  grid-template-rows: 1fr;
+}
+.project-detail-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.project-figure {
+  margin: 1rem 0 0.25rem;
+}
+.project-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 10px;
+  background: #fff;
+}
+.project-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
+}
+.post article .project-detail-text {
+  margin: 0.75rem 0 0;
+}
+@media (max-width: 575.98px) {
+  .project-head {
+    flex-direction: column;
+    gap: 0;
+  }
+  .project-toggle {
+    margin-left: 0;
+  }
+}
+
+// Projects: separators between entries; an open project becomes one tinted panel.
+.projects-list > .project + .project {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--global-divider-color);
+}
+.projects-list > .project {
+  // Negative margin + equal padding keeps the text where it is while the panel background extends around it.
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+.projects-list > .project.is-open {
+  padding-top: 1.1rem;
+  padding-bottom: 1rem;
+  border-top-color: transparent;
+  background-color: color-mix(in srgb, var(--global-text-color) 4%, var(--global-bg-color));
+}
+.projects-list > .project.is-open + .project {
+  border-top-color: transparent;
+}
+.project-collapse {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 999px;
+  background: var(--global-bg-color);
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+  cursor: pointer;
+}
+.project-collapse:hover {
+  color: var(--global-theme-color);
+  border-color: var(--global-theme-color);
+}
+@media (max-width: 575.98px) {
+  .projects-list > .project {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+// Project panels with several figures: side by side on wide screens.
+.project-figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.project-figures .project-figure {
+  margin: 0;
+}
+.project-figures {
+  align-items: start;
+}
+.project-links {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+@media (max-width: 575.98px) {
+  .project-figures {
+    grid-template-columns: 1fr;
+  }
 }
