@@ -545,7 +545,15 @@ body {
 .research-section {
   font-size: 1.5rem;
 }
-// About page name: serif, the first name no longer heavy.
+// About page name: serif, larger than other page titles, the first name no longer heavy.
+.post-header .post-title:has(> .font-weight-bold) {
+  font-size: 2.75rem;
+}
+@media (max-width: 575.98px) {
+  .post-header .post-title:has(> .font-weight-bold) {
+    font-size: 2.4rem;
+  }
+}
 .post-header .post-title .font-weight-bold {
   font-weight: 600 !important;
 }

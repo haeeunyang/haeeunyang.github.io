@@ -37,14 +37,14 @@ cv:
 
     Experience:
       - company: Seoul National University
-        position: Research Assistant (Prof. Wooje Cho)
+        position: 'Research Assistant (<a href="https://gsb.snu.ac.kr/en/faculty?major=1&idx=2921" target="_blank" rel="noopener">Prof. Wooje Cho</a>)'
         start_date: 2025-11
         end_date: 2026-04
         highlights:
           - Matched patent assignee records to firm names using large language models (LLMs).
 
       - company: Seoul National University
-        position: Research Assistant (Prof. Taewoo Lee)
+        position: 'Research Assistant (<a href="https://gsb.snu.ac.kr/en/faculty?major=4&idx=13141" target="_blank" rel="noopener">Prof. Taewoo Lee</a>)'
         start_date: 2025-03
         end_date: 2026-02
         highlights:
@@ -153,10 +153,3 @@ cv:
         keywords: Machine Learning, Deep Learning, Data Mining and Analysis, Algorithms, Database Design and Query
       - name: Information Systems
         keywords: Research in Information Systems (G), Economic Analysis of Information Systems (G), Seminar in Quantitative IS Research (G), Seminar on Organizations and Information Systems (G)
-
-    # Shown on the Experience page.
-    Skills:
-      - name: Programming
-        keywords: Python, R, Stata, SQL, C, Java, HTML
-      - name: Languages
-        keywords: Korean (Native), English (Fluent)

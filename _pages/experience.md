@@ -8,7 +8,7 @@ nav_order: 4
 ---
 
 <!-- Entries come from the Experience section of _data/cv.yml: positions starting with "Research Assistant"
-     go to Research, those starting with "Teaching Assistant" go to Teaching. Projects and Skills come from their own sections; a project with image/details gets an expandable panel. -->
+     go to Research, those starting with "Teaching Assistant" go to Teaching. Projects come from their own section; a project with image/details gets an expandable panel. -->
 {% assign all = site.data.cv.cv.sections.Experience | al_cv_sort_by_date %}
 {% assign research = all | where_exp: "e", "e.position contains 'Research Assistant'" %}
 {% assign teaching = all | where_exp: "e", "e.position contains 'Teaching Assistant'" %}
@@ -112,11 +112,5 @@ nav_order: 4
         });
       });
     </script>
-  </div>
-
-  <div class="card mt-3 p-3">
-    <h3 class="card-title font-weight-medium">Skills</h3>
-    {% assign entries = site.data.cv.cv.sections.Skills %}
-    {% include cv/skills.liquid %}
   </div>
 </div>
