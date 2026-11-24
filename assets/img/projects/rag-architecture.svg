@@ -1,81 +1,102 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 364" width="960" height="364" role="img" aria-labelledby="t d">
-  <title id="t">RAG-Based Engineering Q&amp;A Assistant: system overview</title>
-  <desc id="d">Indexing: documents are chunked and embedded into PostgreSQL with pgvector and pg_trgm. Answering: a Korean or English question goes through hybrid retrieval fused with RRF, an LLM answers with a calculation tool, output checks verify numbers and mask sensitive terms, and the answer is returned with cited sources.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" width="960" height="410" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="t">RAG-Based Engineering Q&amp;A Assistant: retrieval-augmented generation</title>
+  <desc id="d">Indexing: documents are chunked and embedded into a knowledge base with vector and keyword indexes. Answering: (1) Retrieve: the question is used to search the knowledge base with hybrid vector and keyword search, returning the top-k passages. (2) Augment: the question and the retrieved passages are combined into one prompt. (3) Generate: an LLM with a calculation tool writes the answer, which is checked for numeric grounding and sensitive terms and returned with cited sources.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#5b5b66"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
     </marker>
     <style>
-      .bg { fill: #ffffff; }
-      .lane { font: 600 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: 0.12em; fill: #57068c; }
-      .box { fill: #f7f3fb; stroke: #57068c; stroke-width: 1.5; }
-      .box-strong { fill: #57068c; stroke: #57068c; stroke-width: 1.5; }
-      .h { font: 600 15px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #1f1f24; }
-      .s { font: 400 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #4a4a55; }
-      .h-inv { font: 600 15px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #ffffff; }
-      .s-inv { font: 400 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #efe6f7; }
-      .flow { stroke: #5b5b66; stroke-width: 1.6; fill: none; }
-      .divider { stroke: #e3dfe8; stroke-width: 1; stroke-dasharray: 4 4; }
+      .lane { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; fill: #555555; }
+      .stage { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; fill: #111111; }
+      .box { fill: #ffffff; stroke: #111111; stroke-width: 1.5; }
+      .box-strong { fill: #111111; stroke: #111111; stroke-width: 1.5; }
+      .chip { fill: #f0f0f0; stroke: #111111; stroke-width: 1; }
+      .h { font-size: 15px; font-weight: 600; fill: #111111; }
+      .s { font-size: 12px; fill: #555555; }
+      .c { font-size: 11.5px; fill: #111111; }
+      .h-inv { font-size: 15px; font-weight: 600; fill: #ffffff; }
+      .s-inv { font-size: 12px; fill: #e6e6e6; }
+      .flow { stroke: #111111; stroke-width: 1.6; fill: none; }
+      .label { font-size: 12px; font-style: italic; fill: #555555; }
+      .divider { stroke: #d6d6d6; stroke-width: 1; stroke-dasharray: 4 4; }
+      .big { font-size: 19px; font-weight: 600; fill: #111111; }
     </style>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="960" height="364" rx="14"/>
+  <rect x="0" y="0" width="960" height="410" rx="14" fill="#ffffff"/>
 
   <!-- Indexing (offline) -->
-  <text class="lane" x="24" y="36">INDEXING</text>
+  <text class="lane" x="20" y="26">INDEXING · OFFLINE</text>
 
-  <rect class="box" x="40" y="54" width="200" height="78" rx="10"/>
-  <text class="h" x="140" y="82" text-anchor="middle">Documents</text>
-  <text class="s" x="140" y="102" text-anchor="middle">PDF manuals &amp; reports</text>
-  <text class="s" x="140" y="119" text-anchor="middle">Korean · English</text>
+  <rect class="box" x="20" y="40" width="140" height="66" rx="10"/>
+  <text class="h" x="90" y="67" text-anchor="middle">Documents</text>
+  <text class="s" x="90" y="87" text-anchor="middle">PDF manuals · reports</text>
 
-  <rect class="box" x="380" y="54" width="200" height="78" rx="10"/>
-  <text class="h" x="480" y="82" text-anchor="middle">Chunk &amp; embed</text>
-  <text class="s" x="480" y="102" text-anchor="middle">section-aware chunks</text>
-  <text class="s" x="480" y="119" text-anchor="middle">multilingual embeddings</text>
+  <rect class="box" x="175" y="40" width="150" height="66" rx="10"/>
+  <text class="h" x="250" y="67" text-anchor="middle">Chunk &amp; embed</text>
+  <text class="s" x="250" y="87" text-anchor="middle">Korean · English</text>
 
-  <rect class="box" x="720" y="54" width="200" height="78" rx="10"/>
-  <text class="h" x="820" y="82" text-anchor="middle">PostgreSQL</text>
-  <text class="s" x="820" y="102" text-anchor="middle">pgvector (semantic)</text>
-  <text class="s" x="820" y="119" text-anchor="middle">pg_trgm (keyword)</text>
+  <path class="flow" d="M160,73 L171,73" marker-end="url(#arrow)"/>
+  <path class="flow" d="M250,106 L250,136" marker-end="url(#arrow)"/>
 
-  <path class="flow" d="M240,93 L376,93" marker-end="url(#arrow)"/>
-  <path class="flow" d="M580,93 L716,93" marker-end="url(#arrow)"/>
+  <!-- Knowledge base (cylinder) -->
+  <path class="box" d="M180,150 a70,12 0 0,0 140,0 a70,12 0 0,0 -140,0 L180,206 a70,12 0 0,0 140,0 L320,150"/>
+  <text class="h" x="250" y="184" text-anchor="middle">Knowledge base</text>
+  <text class="s" x="250" y="201" text-anchor="middle">vector + keyword index</text>
 
-  <line class="divider" x1="24" y1="176" x2="936" y2="176"/>
+  <!-- Concept line -->
+  <text class="big" x="380" y="66">Retrieval-Augmented Generation</text>
+  <text class="s" x="380" y="90" style="font-size:13px">The model answers from passages retrieved for each question,</text>
+  <text class="s" x="380" y="108" style="font-size:13px">not from what it memorized, and cites them.</text>
 
-  <!-- Answering (online) -->
-  <text class="lane" x="24" y="206">ANSWERING</text>
+  <line class="divider" x1="20" y1="240" x2="940" y2="240"/>
+  <text class="lane" x="20" y="262">ANSWERING</text>
 
-  <rect class="box" x="20" y="262" width="156" height="78" rx="10"/>
-  <text class="h" x="98" y="295" text-anchor="middle">Question</text>
-  <text class="s" x="98" y="315" text-anchor="middle">Korean or English</text>
+  <!-- Stage labels -->
+  <text class="stage" x="250" y="290" text-anchor="middle">① RETRIEVE</text>
+  <text class="stage" x="460" y="290" text-anchor="middle">② AUGMENT</text>
+  <text class="stage" x="665" y="290" text-anchor="middle">③ GENERATE</text>
 
-  <rect class="box" x="206" y="262" width="164" height="78" rx="10"/>
-  <text class="h" x="288" y="290" text-anchor="middle">Hybrid retrieval</text>
-  <text class="s" x="288" y="310" text-anchor="middle">vector + keyword</text>
-  <text class="s" x="288" y="327" text-anchor="middle">fused with RRF</text>
+  <!-- Answering row -->
+  <rect class="box" x="20" y="300" width="120" height="84" rx="10"/>
+  <text class="h" x="80" y="337" text-anchor="middle">Question</text>
+  <text class="s" x="80" y="357" text-anchor="middle">Korean or English</text>
 
-  <rect class="box" x="400" y="262" width="164" height="78" rx="10"/>
-  <text class="h" x="482" y="290" text-anchor="middle">LLM answer</text>
-  <text class="s" x="482" y="310" text-anchor="middle">Claude · GPT · Gemini</text>
-  <text class="s" x="482" y="327" text-anchor="middle">+ calculation tool</text>
+  <rect class="box" x="175" y="300" width="150" height="84" rx="10"/>
+  <text class="h" x="250" y="327" text-anchor="middle">Hybrid search</text>
+  <text class="s" x="250" y="347" text-anchor="middle">vector + keyword</text>
+  <text class="s" x="250" y="364" text-anchor="middle">fused with RRF</text>
 
-  <rect class="box" x="594" y="262" width="164" height="78" rx="10"/>
-  <text class="h" x="676" y="290" text-anchor="middle">Output checks</text>
-  <text class="s" x="676" y="310" text-anchor="middle">numeric grounding</text>
-  <text class="s" x="676" y="327" text-anchor="middle">sensitive-term masking</text>
+  <rect class="box" x="360" y="300" width="200" height="84" rx="10"/>
+  <text class="h" x="460" y="324" text-anchor="middle">Prompt</text>
+  <rect class="chip" x="374" y="336" width="74" height="34" rx="6"/>
+  <text class="c" x="411" y="357" text-anchor="middle">question</text>
+  <text class="h" x="460" y="358" text-anchor="middle">+</text>
+  <rect class="chip" x="472" y="336" width="74" height="34" rx="6"/>
+  <text class="c" x="509" y="351" text-anchor="middle">top-k</text>
+  <text class="c" x="509" y="364" text-anchor="middle">passages</text>
 
-  <rect class="box-strong" x="788" y="262" width="152" height="78" rx="10"/>
-  <text class="h-inv" x="864" y="295" text-anchor="middle">Answer</text>
-  <text class="s-inv" x="864" y="315" text-anchor="middle">with cited sources</text>
+  <rect class="box" x="595" y="300" width="140" height="84" rx="10"/>
+  <text class="h" x="665" y="327" text-anchor="middle">LLM</text>
+  <text class="s" x="665" y="347" text-anchor="middle">Claude · GPT · Gemini</text>
+  <text class="s" x="665" y="364" text-anchor="middle">+ calculation tool</text>
 
-  <path class="flow" d="M176,301 L202,301" marker-end="url(#arrow)"/>
-  <path class="flow" d="M370,301 L396,301" marker-end="url(#arrow)"/>
-  <path class="flow" d="M564,301 L590,301" marker-end="url(#arrow)"/>
-  <path class="flow" d="M758,301 L784,301" marker-end="url(#arrow)"/>
+  <rect class="box-strong" x="770" y="300" width="170" height="84" rx="10"/>
+  <text class="h-inv" x="855" y="327" text-anchor="middle">Answer</text>
+  <text class="s-inv" x="855" y="347" text-anchor="middle">with cited sources</text>
+  <text class="s-inv" x="855" y="364" text-anchor="middle">numbers &amp; terms checked</text>
 
-  <!-- Index feeds retrieval -->
-  <path class="flow" d="M820,132 L820,230 L288,230 L288,258" marker-end="url(#arrow)"/>
-  <text class="s" x="560" y="224" text-anchor="middle">top-k passages</text>
+  <!-- Flows -->
+  <path class="flow" d="M140,342 L171,342" marker-end="url(#arrow)"/>
+  <path class="flow" d="M195,300 L195,219" marker-end="url(#arrow)"/>
+  <path class="flow" d="M305,219 L305,300" marker-end="url(#arrow)"/>
+  <text class="label" x="189" y="262" text-anchor="end">search</text>
+  <path class="flow" d="M325,342 L356,342" marker-end="url(#arrow)"/>
+  <path class="flow" d="M560,342 L591,342" marker-end="url(#arrow)"/>
+  <path class="flow" d="M735,342 L766,342" marker-end="url(#arrow)"/>
+
+  <!-- The question also goes straight into the prompt -->
+  <path class="flow" d="M80,384 L80,398 L411,398 L411,374" marker-end="url(#arrow)"/>
+  <!-- Retrieved passages are what fill the second chip -->
+  <text class="label" x="311" y="262">top-k passages</text>
 </svg>

@@ -8,7 +8,7 @@ nav_order: 2
 ---
 
 <!-- Papers come from _bibliography/papers.bib: @article entries are Publications, @unpublished entries are Working Papers.
-     Conference presentations are listed by hand below. -->
+     Conference presentations are listed by hand below. Expandable paper summaries come from _data/paper_details.yml. -->
 
 <h2 class="research-section">Publications</h2>
 <div class="publications">
@@ -19,6 +19,8 @@ nav_order: 2
 <div class="publications">
 {% bibliography --query @unpublished --group_by none %}
 </div>
+
+<script src="{{ '/assets/js/expand.js' | relative_url }}" defer></script>
 
 <h2 class="research-section">Conference Presentations</h2>
 <ul class="presentations">

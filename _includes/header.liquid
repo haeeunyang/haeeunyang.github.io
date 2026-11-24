@@ -4,21 +4,14 @@
     <div class="container">
       {% comment %} Site-local: show the name on every page, the home page included (theme hides it there). {% endcomment %}
       {% if true %}
-        <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
+        <a class="navbar-brand title" href="{{ site.baseurl }}/">
+          {%- comment -%} Site override: the whole name in one weight (the theme bolds only the first name). {%- endcomment -%}
           {% if site.title == 'blank' %}
-            {% if site.first_name %}
-              <span class="font-weight-bold">
-                {{- site.first_name -}}
-              </span>
-            {% endif %}
-            {% if site.middle_name %}
-              {{- site.middle_name -}}
-            {% endif %}
-            {% if site.last_name %}
-              {{- site.last_name -}}
-            {% endif %}
+            <span class="brand-name">
+              {{- site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name -}}
+            </span>
           {% else %}
-            {{- site.title -}}
+            <span class="brand-name">{{- site.title -}}</span>
           {% endif %}
         </a>
       {% elsif site.enable_navbar_social %}

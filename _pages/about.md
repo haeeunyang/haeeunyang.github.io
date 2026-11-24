@@ -33,24 +33,29 @@ What I enjoy most is measurement: turning unstructured data into variables for c
 
 <div class="research-interests">
   <h2 class="research-interests-title">Research Interests</h2>
-  <ul class="interest-cards">
+  <ul class="interest-cards interest-cards--topics">
     <li>
-      <strong>Cybersecurity and Privacy</strong>
-      <span>How strategic alliances, and R&amp;D alliances in particular, shape firms' data breach risk, and how firms disclose and manage that risk</span>
+      <strong>Cybersecurity, Privacy, and Information Risk</strong>
+      <span>Organizational and governance factors behind corporate cyber risk, information security practices, and how security incidents shape stakeholder and user behavior.</span>
     </li>
     <li>
-      <strong>IT in Organizational Strategy</strong>
-      <span>How firms' digital activities shape firm value, including the role of IT in M&amp;A and strategic alliances</span>
+      <strong>IT Strategy and Interorganizational Relationships</strong>
+      <span>How firms' digital activities, strategic alliances, and inter-firm arrangements create business value and reshape organizational risk.</span>
     </li>
     <li>
-      <strong>Digital Platforms and E-Commerce</strong>
-      <span>Cross-platform usage dynamics and their effects on mobile commerce</span>
-    </li>
-    <li>
-      <strong>Methods</strong>
-      <span>Econometrics for observational data (causal inference, panel and time-series analysis); machine learning and LLMs for measurement from textual data</span>
+      <strong>Digital Platforms and User Behavior</strong>
+      <span>Cross-platform usage dynamics, ecosystem spillovers, and user heterogeneity across mobile apps and digital commerce.</span>
     </li>
   </ul>
+  <div class="interest-methods">
+    <span class="interest-methods-label">Methods</span>
+    <ul class="method-chips">
+      <li>Empirical econometrics</li>
+      <li>Causal inference</li>
+      <li>Econometrics at the intersection with machine learning</li>
+      <li>Unstructured text analysis</li>
+    </ul>
+  </div>
 </div>
 
 <script>

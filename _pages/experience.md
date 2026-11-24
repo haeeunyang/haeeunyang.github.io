@@ -8,7 +8,7 @@ nav_order: 4
 ---
 
 <!-- Entries come from the Experience section of _data/cv.yml: positions starting with "Research Assistant"
-     go to Research, those starting with "Teaching Assistant" go to Teaching. Projects come from their own section; a project with image/details gets an expandable panel. -->
+     go to Research, those starting with "Teaching Assistant" go to Teaching. Projects come from their own section; a project with image/details gets a thumbnail and a link that expand a panel below it. -->
 {% assign all = site.data.cv.cv.sections.Experience | al_cv_sort_by_date %}
 {% assign research = all | where_exp: "e", "e.position contains 'Research Assistant'" %}
 {% assign teaching = all | where_exp: "e", "e.position contains 'Teaching Assistant'" %}
@@ -33,27 +33,49 @@ nav_order: 4
       {% for e in projects %}
         {% assign has_detail = false %}
         {% if e.image or e.details or e.figures %}{% assign has_detail = true %}{% endif %}
-        <li class="project{% if has_detail %} has-detail{% endif %}">
-          <div class="project-head">
-            {% if has_detail %}
-              <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-detail-{{ forloop.index }}">
-                <i class="fa-solid fa-chevron-right project-chevron" aria-hidden="true"></i>
+        {% assign thumb = e.image | default: e.figures[0].src %}
+        {% capture panel_id %}project-detail-{{ forloop.index }}{% endcapture %}
+        <li class="project{% if has_detail %} expandable{% endif %}">
+          <div class="expand-row">
+            <div class="expand-main">
+              <div class="project-head">
                 <span class="project-title">{{ e.name }}</span>
+                <span class="project-date">{{ e.period }}</span>
+              </div>
+              <p class="project-org">{{ e.summary }}</p>
+              {% if e.highlights %}
+                <ul class="items">
+                  {% for h in e.highlights %}<li>{{ h }}</li>{% endfor %}
+                </ul>
+              {% endif %}
+              {% if has_detail %}
+                {% comment %} Link text lists what the panel holds, e.g. "View details, figures & code". {% endcomment %}
+                {% assign parts = "" | split: "" %}
+                {% if e.details %}{% assign parts = parts | push: "details" %}{% endif %}
+                {% if e.figures.size > 1 %}{% assign parts = parts | push: "figures" %}{% elsif e.image or e.figures %}{% assign parts = parts | push: "figure" %}{% endif %}
+                {% if e.links %}{% assign parts = parts | push: "code" %}{% endif %}
+                {% assign last_part = parts | last %}
+                {% if parts.size > 1 %}
+                  {% assign head_parts = parts | pop %}
+                  {% capture link_label %}View {{ head_parts | join: ", " }} &amp; {{ last_part }}{% endcapture %}
+                {% else %}
+                  {% capture link_label %}View {{ last_part }}{% endcapture %}
+                {% endif %}
+                <button class="expand-link" type="button" data-expand aria-expanded="false" aria-controls="{{ panel_id }}">
+                  <span class="expand-link-label" data-closed="{{ e.detail_label | default: link_label | strip }}" data-open="Hide details">{{ e.detail_label | default: link_label | strip }}</span>
+                  <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                </button>
+              {% endif %}
+            </div>
+            {% if has_detail and thumb %}
+              <button class="expand-thumb" type="button" data-expand aria-expanded="false" aria-controls="{{ panel_id }}" aria-label="Show details for {{ e.name }}">
+                <img src="{{ thumb | relative_url }}" alt="" loading="lazy">
               </button>
-            {% else %}
-              <span class="project-title">{{ e.name }}</span>
             {% endif %}
-            <span class="project-date">{{ e.period }}</span>
           </div>
-          <p class="project-org">{{ e.summary }}</p>
-          {% if e.highlights %}
-            <ul class="items">
-              {% for h in e.highlights %}<li>{{ h }}</li>{% endfor %}
-            </ul>
-          {% endif %}
           {% if has_detail %}
-            <div class="project-detail" id="project-detail-{{ forloop.index }}">
-              <div class="project-detail-inner">
+            <div class="expand-panel" id="{{ panel_id }}">
+              <div class="expand-panel-inner">
                 {% if e.details %}<p class="project-detail-text">{{ e.details }}</p>{% endif %}
                 {% if e.image %}
                   <figure class="project-figure">
@@ -66,7 +88,7 @@ nav_order: 4
                 {% if e.figures %}
                   <div class="project-figures">
                     {% for f in e.figures %}
-                      <figure class="project-figure">
+                      <figure class="project-figure{% if f.wide %} project-figure--wide{% endif %}">
                         <a href="{{ f.src | relative_url }}" target="_blank" rel="noopener" title="Open full size">
                           <img src="{{ f.src | relative_url }}" alt="{{ f.alt | default: f.caption }}" loading="lazy">
                         </a>
@@ -82,7 +104,7 @@ nav_order: 4
                     {% endfor %}
                   </div>
                 {% endif %}
-                <button class="project-collapse" type="button" aria-controls="project-detail-{{ forloop.index }}">
+                <button class="expand-collapse" type="button" aria-controls="{{ panel_id }}">
                   Hide details <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
                 </button>
               </div>
@@ -91,26 +113,6 @@ nav_order: 4
         </li>
       {% endfor %}
     </ul>
-    <script>
-      // Expand/collapse project details; the chevron rotates via [aria-expanded].
-      function setOpen(project, open) {
-        project.classList.toggle("is-open", open);
-        project.querySelector(".project-toggle").setAttribute("aria-expanded", String(open));
-      }
-      document.querySelectorAll(".project-toggle").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var project = btn.closest(".project");
-          setOpen(project, !project.classList.contains("is-open"));
-        });
-      });
-      // "Hide details" at the bottom of an open panel: collapse and bring the title back into view.
-      document.querySelectorAll(".project-collapse").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var project = btn.closest(".project");
-          setOpen(project, false);
-          project.scrollIntoView({ block: "nearest", behavior: "smooth" });
-        });
-      });
-    </script>
+    <script src="{{ '/assets/js/expand.js' | relative_url }}" defer></script>
   </div>
 </div>

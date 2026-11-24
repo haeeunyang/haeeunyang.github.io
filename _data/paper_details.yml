@@ -1,0 +1,100 @@
+# Expandable summaries for papers on the Research page, keyed by the BibTeX key in _bibliography/papers.bib.
+# Rendered by _layouts/bib.liquid: figure as a thumbnail, and an expandable panel
+# with the question, the full figure and the details (Markdown). label = optional text for the link that opens it.
+
+jung2026interapp:
+  figure: /assets/img/papers/fig_inter_app_bars.svg
+  figure_alt: "Two bar charts of the change in shopping-app usage in each of the 12 hours after media use. After OTT use the significant bars are all positive (hours 1, 2, 6, 7, 10, 11 and 12), with a cumulative response of about 0.17. After social media use the bars are positive at hours 1, 2, 5, 10, 11 and 12 and negative at hours 7, 8 and 9, with a cumulative response of about 0.11."
+  question: Social media is known to spill over into mobile shopping. We ask whether streaming (OTT) does the same, and whether the two differ in how the response unfolds over time.
+  details: |
+    **Data**
+    - Hourly app-usage logs from 248 members of a Korean consumer panel.
+    - About 31 months from March 2022.
+
+    **Method**
+    - A vector autoregression with 12 hourly lags across six apps.
+    - Focus on a shopping app (Coupang), an OTT service (Tving), and a social media app (Instagram).
+    - Re-estimated by gender and by age cohort.
+
+    **Findings**
+    - Instagram usage is followed by an oscillating response in shopping-app usage: positive within the first two hours, negative around seven to nine hours, and positive again after that.
+    - Tving usage is followed by a steadier response: positive at seven of the twelve lags and never significantly negative. Its cumulative response is about 1.55 times that of Instagram.
+    - The responses are larger among women and strongest among users in their 30s and 40s. Users in their 50s and 60s respond with a delay.
+
+    **Contribution**
+    - Shows that streaming, not only social media, is followed by mobile-shopping activity.
+    - Shows that the two differ in timing and across user groups, which matters for targeting digital strategies by user characteristics.
+
+    **Limitation**
+    - Usage time is not purchase; the paper does not observe transactions.
+
+    **Future research**
+    - Link app usage to purchase records to see whether the usage response turns into spending.
+
+cheung2025digital:
+  figure: /assets/img/papers/fig_digital_activity.svg
+  figure_caption: Signs show estimated directions.
+  figure_alt: "Research model. Digital activity in year t−1, measured by digital keywords in annual reports, points to firm value in year t, measured by Tobin's Q, labelled H1 (+). Two moderators point to this path from below: the period after COVID-19, labelled H2 (−), and industry, labelled H3 (−)."
+  question: We ask whether a firm's digital activity is reflected in its market value, and whether that depends on timing and industry.
+  details: |
+    **Hypotheses**
+    - H1. Digital activity is positively related to financial performance.
+    - H2. The relationship differs before and after COVID-19.
+    - H3. The relationship differs between the IT and retail industries.
+
+    **Data**
+    - 402 firms listed on KOSPI and KOSDAQ (236 IT, 166 retail), 2016–2023.
+
+    **Method**
+    - Digital activity: the number of digital-related keywords in the business-overview section of each firm's annual report, lagged one year.
+    - Tobin's Q regressed on this measure, with controls for firm size, profitability, leverage, and liquidity.
+
+    **Findings**
+    - H1 supported: digital activity is positively associated with Tobin's Q.
+    - H2 supported: the association weakened after COVID-19.
+    - H3 supported: the association is weaker in retail than in IT. In the retail subsample it is not statistically significant.
+
+    **Contribution**
+    - Measures digital activity from annual-report text.
+    - Shows that its link to firm value depends on timing and industry, which argues for industry-specific approaches to digital transformation.
+
+    **Limitation**
+    - Keyword counts are an indirect measure.
+    - Firms with stronger performance may invest more in digital activity.
+
+    **Future research**
+    - More direct measures of digital investment.
+    - Designs that separate cause from effect.
+
+yang2026alliances:
+  figure: /assets/img/papers/fig_alliances_breach.svg
+  figure_alt: "Research model. New non-equity alliances (count, year t−1) point to hacking breaches (count, year t), labelled H1 (+). R&D alliance (1 if any, year t−1) points down to this path, labelled H2 (−)."
+  question: We ask whether forming more non-equity strategic alliances exposes a firm to more hacking breaches, and whether that depends on whether the firm has an R&D alliance.
+  details: |
+    **Hypotheses**
+    - H1. Newly formed non-equity alliances are positively associated with subsequent hacking breaches.
+    - H2. R&D alliances weaken this association.
+
+    **Data**
+    - S&P 500 firm-years, 2006–2025 (9,852 firm-years, 868 firms).
+    - Combines SDC Platinum, Privacy Rights Clearinghouse, and Compustat.
+
+    **Method**
+    - Poisson pseudo-maximum likelihood (PPML) with firm or industry fixed effects.
+
+    **Findings**
+    - H1 not supported: the number of new alliances is not significantly related to hacking breaches.
+    - H2 supported: the interaction with R&D alliance is negative and significant, also in the full Compustat sample.
+
+    **Contribution**
+    - Extends research on interfirm relationships and cybersecurity to non-equity alliances across industries and partner types.
+    - Shows that the alliance–breach relationship depends on what partners do together, not only on how many alliances a firm forms.
+
+    **Limitation**
+    - The R&D alliance indicator does not measure safeguards directly.
+    - Only newly formed alliances are counted, not all active ones.
+
+    **Future research**
+    - Text analysis of 10-K cybersecurity disclosures to measure safeguards before and after R&D alliances.
+    - Comparing alliances, joint ventures, and M&As.
+    - Testing nonlinear patterns.

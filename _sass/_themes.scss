@@ -6,19 +6,19 @@
 
 :root {
   color-scheme: light;
-  --global-bg-color: #{v.$white-color};
+  --global-bg-color: #faf7f0; // warm ivory
   --global-code-bg-color: #{v.$code-bg-color-light};
-  --global-text-color: #{v.$black-color};
+  --global-text-color: #2a2420; // warm charcoal
   --global-text-color-light: #{v.$grey-color};
-  --global-theme-color: #57068c; // violet
-  --global-hover-color: #4b2e83; // deep purple
+  --global-theme-color: #48057a; // deep violet
+  --global-hover-color: #330456; // darker violet
   --global-hover-text-color: #{v.$white-color};
   --global-footer-bg-color: #{v.$grey-color-dark};
   --global-footer-text-color: #{v.$grey-color-light};
   --global-footer-link-color: #{v.$white-color};
   --global-distill-app-color: #{v.$grey-color};
-  --global-divider-color: rgba(0, 0, 0, 0.1);
-  --global-card-bg-color: #{v.$white-color};
+  --global-divider-color: rgba(60, 40, 20, 0.12);
+  --global-card-bg-color: #fffdf8;
   --global-highlight-color: #{v.$red-color-dark};
   --global-back-to-top-bg-color: rgba(
     #{color.channel(v.$black-color, "red", v.$space: rgb)},
@@ -27,7 +27,7 @@
     0.4
   );
   --global-back-to-top-text-color: #{v.$white-color};
-  --global-newsletter-bg-color: #{v.$white-color};
+  --global-newsletter-bg-color: #fffdf8;
   --global-newsletter-text-color: #{v.$black-color};
 
   --global-tip-block: #42b983;
@@ -317,11 +317,11 @@ html[data-theme-setting="light"] {
   }
 }
 
-// Site-local addition: scroll effects.
-// 1) Translucent navbar: content scrolling underneath shows through, blurred.
+// Site-local addition: navbar.
+// Opaque violet band; the scroll progress bar sits under it.
 // Violet band with white text, in both light and dark mode.
 #navbar {
-  --navbar-band: #57068c;
+  --navbar-band: #48057a;
   background-color: var(--navbar-band) !important; // opaque, so the page behind does not tint it
   border-bottom: 0;
   box-shadow: 0 1px 6px rgb(0 0 0 / 0.15);
@@ -336,6 +336,19 @@ html[data-theme-setting="light"] {
 }
 #navbar .nav-link {
   opacity: 0.85;
+}
+// Taller band and a larger name, set in one weight.
+#navbar.navbar {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+#navbar .navbar-brand .brand-name {
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+#navbar .nav-link {
+  font-size: 1.02rem;
 }
 #navbar .nav-link:hover {
   opacity: 1;
@@ -356,36 +369,6 @@ html[data-theme-setting="light"] {
 }
 #progress::-moz-progress-bar {
   background-color: #b7a57a;
-}
-
-// 2) Content fades and slides in as it scrolls into view (CSS scroll-driven animations, no JS).
-//    Browsers without support, and visitors who prefer reduced motion, simply see the content as is.
-@keyframes reveal-in {
-  // opacity + transform only: both are cheap to animate (no per-frame blur repaint).
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .post article > p,
-    .research-interests,
-    .post h2,
-    .news tr,
-    .publications ol.bibliography > li,
-    .cv .card,
-    .cv-actions,
-    .cv-pdf {
-      animation: reveal-in linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-  }
 }
 
 // Site-local addition: Research page sections and the hand-written presentations list.
@@ -511,6 +494,75 @@ footer.sticky-bottom {
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--global-text-color-light);
+}
+// Topics as three cards in a row; methods as a separate row of chips below them.
+.interest-cards--topics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 767.98px) {
+  .interest-cards--topics {
+    grid-template-columns: 1fr;
+  }
+}
+.interest-methods {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 1rem;
+}
+.interest-methods-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--global-theme-color);
+}
+.method-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.method-chips li {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--global-theme-color) 45%, transparent);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+// Page intro: the header and the first blocks rise in once, staggered, when a page opens.
+// Plays once on load only (not tied to scrolling); skipped for visitors who prefer reduced motion.
+@keyframes intro-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .post-header > *,
+  .post article > *:nth-child(-n + 3):not(.clearfix),
+  .post article > .clearfix > * {
+    // Longhands, so the per-element delays below are not reset by this more specific rule.
+    animation-name: intro-in;
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  .post-header > :nth-child(2) { animation-delay: 80ms; }
+  .post article > :nth-child(1) { animation-delay: 160ms; }
+  .post article > :nth-child(2) { animation-delay: 240ms; }
+  .post article > :nth-child(3) { animation-delay: 320ms; }
+  .post article > .clearfix > :nth-child(1) { animation-delay: 240ms; }
+  .post article > .clearfix > :nth-child(2) { animation-delay: 320ms; }
+  .post article > .clearfix > :nth-child(n + 3) { animation-delay: 400ms; }
 }
 .coursework-note {
   margin: 0.5rem 0 0;
@@ -644,7 +696,7 @@ body {
   margin-bottom: 0.15rem;
 }
 .cv h6.title {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600 !important;
 }
 .cv ul.items {
@@ -691,6 +743,8 @@ body {
   margin-top: 0;
 }
 .publications .title {
+  font-size: 1.15rem;
+  line-height: 1.4;
   font-weight: 600;
 }
 // Stronger overrides for theme rules that out-rank the ones above.
@@ -781,7 +835,7 @@ body {
   color: color-mix(in srgb, var(--global-text-color) 80%, var(--global-bg-color));
 }
 
-// Experience: projects; ones with an image or details expand below when the title is clicked.
+// Experience: projects; ones with an image or details expand below (see "Expandable entries").
 .projects-list {
   margin: 0;
   padding: 0;
@@ -797,7 +851,7 @@ body {
   gap: 1rem;
 }
 .project-title {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--global-text-color);
 }
@@ -806,45 +860,8 @@ body {
   font-size: 0.9rem;
   color: var(--global-text-color-light);
 }
-.project-toggle {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin: 0 0 0 -1.55rem;           // chevron hangs in the left margin (inside the open panel) so titles stay aligned
-  padding: 0;
-  border: 0;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-}
-.project-toggle:hover .project-title,
-.project-toggle:focus-visible .project-title {
-  color: var(--global-theme-color);
-}
-.project-chevron {
-  width: 0.8rem;
-  font-size: 0.8rem;
-  color: var(--global-theme-color);
-  transition: transform 0.2s ease;
-}
-.project-toggle[aria-expanded="true"] .project-chevron {
-  transform: rotate(90deg);
-}
 .post article .project-org {
   margin: 0.15rem 0 0;
-}
-// Smooth open/close: grid rows animate from 0fr to 1fr.
-.project-detail {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease;
-}
-.project.is-open .project-detail {
-  grid-template-rows: 1fr;
-}
-.project-detail-inner {
-  overflow: hidden;
-  min-height: 0;
 }
 .project-figure {
   margin: 1rem 0 0.25rem;
@@ -869,9 +886,6 @@ body {
   .project-head {
     flex-direction: column;
     gap: 0;
-  }
-  .project-toggle {
-    margin-left: 0;
   }
 }
 
@@ -899,7 +913,7 @@ body {
 .projects-list > .project.is-open + .project {
   border-top-color: transparent;
 }
-.project-collapse {
+.expand-collapse {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -912,7 +926,7 @@ body {
   color: var(--global-text-color-light);
   cursor: pointer;
 }
-.project-collapse:hover {
+.expand-collapse:hover {
   color: var(--global-theme-color);
   border-color: var(--global-theme-color);
 }
@@ -935,6 +949,14 @@ body {
 .project-figures .project-figure {
   margin: 0;
 }
+.project-figures .project-figure--wide {
+  grid-column: 1 / -1;
+}
+// A full-width photo would dominate the panel: keep it to a banner height (diagrams keep their full size).
+.project-figures .project-figure--wide img:not([src$=".svg"]) {
+  max-height: 20rem;
+  object-fit: cover;
+}
 .project-figures {
   align-items: start;
 }
@@ -955,4 +977,157 @@ body {
   max-width: 100%;
   margin: 0 auto;
   background: #fff;
+}
+
+// Expandable entries (projects, publications): a thumbnail on the right and a text link in the theme color
+// both open a panel below (assets/js/expand.js). The thumbnail is the visual cue that there is more to see.
+.expand-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.expand-main {
+  flex: 1;
+  min-width: 0;
+}
+.expand-thumb {
+  flex-shrink: 0;
+  width: 170px;
+  height: 110px;
+  margin-top: 0.2rem;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 6px;
+  background: #fff;                 // figures are drawn on white, also in dark mode
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.expand-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.expand-thumb:hover,
+.expand-thumb:focus-visible {
+  border-color: var(--global-theme-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+}
+.expand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--global-theme-color);
+  cursor: pointer;
+}
+// The theme colors button text, so the color is set on the children.
+.expand-link-label,
+.expand-link i {
+  color: var(--global-theme-color);
+}
+.expand-link i {
+  font-size: 0.7em;
+  transition: transform 0.2s ease;
+}
+.expand-link:hover .expand-link-label,
+.expand-link:focus-visible .expand-link-label {
+  text-decoration: underline;
+}
+.expandable.is-open .expand-link i {
+  transform: rotate(180deg);
+}
+// Smooth open/close: grid rows animate from 0fr to 1fr.
+.expand-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.expandable.is-open .expand-panel {
+  grid-template-rows: 1fr;
+}
+.expand-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+// Phones: no room beside the text, so the link alone opens the panel.
+@media (max-width: 575.98px) {
+  .expand-thumb {
+    display: none;
+  }
+}
+
+// Research page: the expanded paper summary as a tinted box.
+.paper-detail {
+  margin-top: 0.9rem;
+  padding: 1rem 1.25rem 0.9rem;
+  border-radius: 10px;
+  background-color: color-mix(in srgb, var(--global-text-color) 4%, var(--global-bg-color));
+}
+.paper-detail p,
+.paper-detail ul {
+  margin: 0 0 0.6rem;
+}
+.paper-detail ul {
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+.publications ol.bibliography .paper-detail li {
+  margin: 0 0 0.2rem;
+}
+.post article .paper-detail li p {
+  margin: 0;
+}
+.paper-detail .project-figure {
+  margin: 0.25rem 0 1rem;
+}
+.post article .paper-detail .paper-question {
+  margin-bottom: 0.75rem;
+}
+// Section labels (Data., Method., ...) sit close to their own bullets and apart from the next section.
+.post article .paper-detail p:has(+ ul) {
+  margin-bottom: 0.2rem;
+}
+.post article .paper-detail ul {
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+}
+// Diagrams and charts (SVG) are wide: show the whole figure in the thumbnail rather than a crop. Photos keep the crop.
+.expand-thumb img[src$=".svg"] {
+  object-fit: contain;
+  padding: 4px;
+}
+
+// Education: coursework as category headings with the courses underneath.
+.coursework {
+  margin: 0;
+}
+.coursework dt {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.coursework dd {
+  margin: 0.15rem 0 0;
+  color: var(--global-text-color);
+}
+.coursework dd + dt {
+  margin-top: 1rem;
+}
+
+// Inline text links in page content read better slightly heavier than body text (buttons keep their own weight).
+[role="main"] a:not(.btn):not(.badge):not(.expand-thumb) {
+  font-weight: 500;
+}
+
+// CV date badges show semesters ("Spring 2025 – Fall 2025"), so let long ones wrap inside the date column.
+.cv .badge.cv-period {
+  white-space: normal;
+  line-height: 1.35;
+  max-width: 100%;
 }

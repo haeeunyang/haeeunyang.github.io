@@ -61,8 +61,12 @@
     </div>
   {% endif %}
 
+  <!-- Site-local addition: expandable summary from _data/paper_details.yml (figure thumbnail, panel) -->
+  {% assign pd = site.data.paper_details[entry.key] %}
+  {% capture pd_panel_id %}paper-detail-{{ entry.key }}{% endcapture %}
   <!-- Entry bib key -->
-  <div id="{{ entry.key }}" class="{% if site.enable_publication_thumbnails %}col-sm-8{% else %}col-sm-10{% endif %}">
+  <div id="{{ entry.key }}" class="{% if site.enable_publication_thumbnails %}col-sm-8{% elsif pd %}col-12{% else %}col-sm-10{% endif %}{% if pd %} expandable{% endif %}">
+    {% if pd %}<div class="expand-row"><div class="expand-main">{% endif %}
     <!-- Title -->
     <div class="title">{{ entry.title }}</div>
     <!-- Author -->
@@ -213,6 +217,19 @@
       <!-- Site-local addition: one-sentence summary (used for working papers without a public abstract) -->
       <div class="paper-description">{{ entry.description }}</div>
     {% endif %}
+    {% if pd %}
+      <button class="expand-link" type="button" data-expand aria-expanded="false" aria-controls="{{ pd_panel_id }}">
+        {% assign pd_label = pd.label | default: "View summary, figure &amp; findings" %}<span class="expand-link-label" data-closed="{{ pd_label }}" data-open="Hide summary">{{ pd_label }}</span>
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </button>
+      </div>
+      {% if pd.figure %}
+        <button class="expand-thumb" type="button" data-expand aria-expanded="false" aria-controls="{{ pd_panel_id }}" aria-label="Show summary of {{ entry.title }}">
+          <img src="{{ pd.figure | relative_url }}" alt="" loading="lazy">
+        </button>
+      {% endif %}
+      </div>
+    {% endif %}
 
     <!-- Links/Buttons -->
     <div class="links">
@@ -286,6 +303,25 @@
         <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
       {% endif %}
     </div>
+    {% if pd %}
+      <div class="expand-panel" id="{{ pd_panel_id }}">
+        <div class="expand-panel-inner"><div class="paper-detail">
+          {% if pd.question %}<p class="paper-question">{{ pd.question }}</p>{% endif %}
+          {% if pd.figure %}
+            <figure class="project-figure">
+              <a href="{{ pd.figure | relative_url }}" target="_blank" rel="noopener" title="Open full size">
+                <img src="{{ pd.figure | relative_url }}" alt="{{ pd.figure_alt | escape }}" loading="lazy">
+              </a>
+              {% if pd.figure_caption %}<figcaption>{{ pd.figure_caption }}</figcaption>{% endif %}
+            </figure>
+          {% endif %}
+          {{ pd.details | markdownify }}
+          <button class="expand-collapse" type="button" aria-controls="{{ pd_panel_id }}">
+            Hide summary <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+          </button>
+        </div></div>
+      </div>
+    {% endif %}
     {% if site.enable_publication_badges %}
       {% assign entry_has_altmetric_badge = false %}
       {% if entry.altmetric and entry.altmetric != 'false' %}

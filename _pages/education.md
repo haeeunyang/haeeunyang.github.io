@@ -7,7 +7,7 @@ nav: true
 nav_order: 3
 ---
 
-<!-- Entries come from the Education, Awards and Coursework sections of _data/cv.yml, rendered with the theme's CV templates. -->
+<!-- Entries come from the Education, Awards and Coursework sections of _data/cv.yml, rendered with the theme's CV templates (Coursework as a category / course list). -->
 <div class="cv">
   <div class="card mt-3 p-3">
     <h3 class="card-title font-weight-medium">Degrees</h3>
@@ -23,8 +23,12 @@ nav_order: 3
 
   <div class="card mt-3 p-3">
     <h3 class="card-title font-weight-medium">Selected Coursework</h3>
-    {% assign entries = site.data.cv.cv.sections.Coursework %}
-    {% include cv/skills.liquid %}
+    <dl class="coursework">
+      {% for e in site.data.cv.cv.sections.Coursework %}
+        <dt>{{ e.name }}</dt>
+        <dd>{{ e.keywords }}</dd>
+      {% endfor %}
+    </dl>
     <p class="coursework-note">(G) = graduate-level course</p>
   </div>
 </div>
