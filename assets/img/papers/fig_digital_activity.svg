@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 350" width="880" height="350" role="img" aria-labelledby="t1 d1" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t1">Research model: digital activity and firm value</title>
+<desc id="d1">Digital activity in year t−1, measured by digital keywords in annual reports, points to firm value in year t, measured by Tobin's Q, labelled H1 positive. Two moderators point to this path from below: the period after COVID-19, labelled H2 negative, and industry, labelled H3 negative.</desc>
+<defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111111"/></marker></defs>
+<rect width="880" height="350" rx="14" fill="#ffffff"/>
+<rect x="40" y="40" width="280" height="96" rx="8" fill="#ffffff" stroke="#111111" stroke-width="1.6"/><text x="180.0" y="84.0" text-anchor="middle" font-size="19" font-weight="600" fill="#111111">Digital activity (year t−1)</text><text x="180.0" y="108.0" text-anchor="middle" font-size="14" fill="#555555">digital keywords in annual reports</text>
+<rect x="560" y="40" width="280" height="96" rx="8" fill="#ffffff" stroke="#111111" stroke-width="1.6"/><text x="700.0" y="84.0" text-anchor="middle" font-size="19" font-weight="600" fill="#111111">Firm value (year t)</text><text x="700.0" y="108.0" text-anchor="middle" font-size="14" fill="#555555">Tobin's Q</text>
+<line x1="322" y1="88" x2="556" y2="88" stroke="#111111" stroke-width="2.2" marker-end="url(#a1)"/>
+<text x="440" y="74" text-anchor="middle" font-size="16" font-weight="600" fill="#111111">H1 (+)</text>
+<rect x="290" y="226" width="140" height="56" rx="8" fill="#ffffff" stroke="#111111" stroke-width="1.6"/><text x="360.0" y="260.0" text-anchor="middle" font-size="16" font-weight="600" fill="#111111">After COVID-19</text>
+<rect x="450" y="226" width="140" height="56" rx="8" fill="#ffffff" stroke="#111111" stroke-width="1.6"/><text x="520.0" y="260.0" text-anchor="middle" font-size="16" font-weight="600" fill="#111111">Industry</text>
+<line x1="360" y1="224" x2="360" y2="95" stroke="#111111" stroke-width="1.8" marker-end="url(#a1)"/>
+<line x1="520" y1="224" x2="520" y2="95" stroke="#111111" stroke-width="1.8" marker-end="url(#a1)"/>
+<text x="371" y="168" text-anchor="start" font-size="16" font-weight="600" fill="#111111">H2 (−)</text>
+<text x="531" y="168" text-anchor="start" font-size="16" font-weight="600" fill="#111111">H3 (−)</text>
+<text x="440" y="328" text-anchor="middle" font-size="13" fill="#555555">402 KOSPI/KOSDAQ firms (236 IT, 166 retail), 2016–2023 · Controls: firm size, ROE, leverage, liquidity, year</text>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="t">Four models compared for camera pose regression</title>
+  <desc id="d">Each model takes one 224 by 224 RGB video frame and outputs the camera pose: position x, y, z and an orientation quaternion w, x, y, z. Model 1: ImageNet-pretrained ResNet50 with a linear head from 2048 to 7. Model 2: ResNet50 features fed to two Transformer encoders, one for position and one for orientation, each with 6 layers and 4 heads. Model 3: a Vision Transformer, ViT-B/16, using the CLS token with linear heads for position and orientation. Model 4: ResNet50 features compressed by an encoder from 2048 to 512 to 128, then a regressor from 128 to 128 to 7 with dropout 0.5. All models are trained with position mean squared error plus a beta-weighted quaternion error.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #111111; stroke-width: 1.5; }
+      .dark { fill: #111111; stroke: #111111; stroke-width: 1.5; }
+      .name { font-size: 13px; font-weight: 700; fill: #111111; }
+      .h { font-size: 14px; font-weight: 600; fill: #111111; }
+      .s { font-size: 12px; fill: #555555; }
+      .h-inv { font-size: 15px; font-weight: 600; fill: #ffffff; }
+      .s-inv { font-size: 12px; fill: #e6e6e6; }
+      .flow { stroke: #111111; stroke-width: 1.6; fill: none; }
+      .bus { stroke: #111111; stroke-width: 1.6; fill: none; }
+      .note { font-size: 12.5px; fill: #555555; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="400" rx="14" fill="#ffffff"/>
+
+  <!-- Input frame: three stacked squares for the RGB channels -->
+  <rect class="box" x="44" y="152" width="70" height="70" rx="4"/>
+  <rect class="box" x="35" y="161" width="70" height="70" rx="4"/>
+  <rect class="box" x="26" y="170" width="70" height="70" rx="4"/>
+  <path d="M31,234 L51,205 L64,220 L75,207 L90,234 z" fill="#d6d6d6"/>
+  <circle cx="80" cy="186" r="5.5" fill="#d6d6d6"/>
+  <text class="h" x="70" y="266" text-anchor="middle">Video frame</text>
+  <text class="s" x="70" y="283" text-anchor="middle">224 × 224 × 3</text>
+
+  <!-- Left bus: the same frame goes into every model -->
+  <path class="flow" d="M114,200 L150,200"/>
+  <path class="bus" d="M150,80 L150,320"/>
+  <path class="flow" d="M150,80 L171,80" marker-end="url(#arrow)"/>
+  <path class="flow" d="M150,160 L171,160" marker-end="url(#arrow)"/>
+  <path class="flow" d="M150,240 L171,240" marker-end="url(#arrow)"/>
+  <path class="flow" d="M150,320 L171,320" marker-end="url(#arrow)"/>
+
+  <!-- 1. ResNet50 PoseNet -->
+  <text class="name" x="175" y="51">1 · ResNet50 PoseNet</text>
+  <rect class="box" x="175" y="60" width="170" height="40" rx="8"/>
+  <text class="h" x="260" y="78" text-anchor="middle">ResNet50</text>
+  <text class="s" x="260" y="93" text-anchor="middle">ImageNet-pretrained</text>
+  <rect class="box" x="365" y="60" width="390" height="40" rx="8"/>
+  <text class="h" x="560" y="85" text-anchor="middle">Linear head 2048 → 7</text>
+  <path class="flow" d="M345,80 L361,80" marker-end="url(#arrow)"/>
+
+  <!-- 2. ResNet50 + Transformer -->
+  <text class="name" x="175" y="131">2 · ResNet50 + Transformer</text>
+  <rect class="box" x="175" y="140" width="170" height="40" rx="8"/>
+  <text class="h" x="260" y="158" text-anchor="middle">ResNet50</text>
+  <text class="s" x="260" y="173" text-anchor="middle">ImageNet-pretrained</text>
+  <rect class="box" x="365" y="140" width="390" height="40" rx="8"/>
+  <text class="h" x="560" y="158" text-anchor="middle">Transformer encoders × 2 (position, orientation)</text>
+  <text class="s" x="560" y="173" text-anchor="middle">6 layers · 4 heads · d = 256</text>
+  <path class="flow" d="M345,160 L361,160" marker-end="url(#arrow)"/>
+
+  <!-- 3. Vision Transformer -->
+  <text class="name" x="175" y="211">3 · Vision Transformer</text>
+  <rect class="box" x="175" y="220" width="170" height="40" rx="8"/>
+  <text class="h" x="260" y="238" text-anchor="middle">ViT-B/16</text>
+  <text class="s" x="260" y="253" text-anchor="middle">16 × 16 patches · CLS token</text>
+  <rect class="box" x="365" y="220" width="390" height="40" rx="8"/>
+  <text class="h" x="560" y="245" text-anchor="middle">Linear heads: position (3) + orientation (4)</text>
+  <path class="flow" d="M345,240 L361,240" marker-end="url(#arrow)"/>
+
+  <!-- 4. ResNet50 + encoder bottleneck -->
+  <text class="name" x="175" y="291">4 · ResNet50 + encoder bottleneck</text>
+  <rect class="box" x="175" y="300" width="170" height="40" rx="8"/>
+  <text class="h" x="260" y="318" text-anchor="middle">ResNet50</text>
+  <text class="s" x="260" y="333" text-anchor="middle">ImageNet-pretrained</text>
+  <rect class="box" x="365" y="300" width="185" height="40" rx="8"/>
+  <text class="h" x="457" y="318" text-anchor="middle">Encoder</text>
+  <text class="s" x="457" y="333" text-anchor="middle">2048 → 512 → 128</text>
+  <rect class="box" x="570" y="300" width="185" height="40" rx="8"/>
+  <text class="h" x="662" y="318" text-anchor="middle">Regressor</text>
+  <text class="s" x="662" y="333" text-anchor="middle">128 → 128 → 7 · dropout 0.5</text>
+  <path class="flow" d="M345,320 L361,320" marker-end="url(#arrow)"/>
+  <path class="flow" d="M550,320 L566,320" marker-end="url(#arrow)"/>
+
+  <!-- Right bus: every model outputs the same pose -->
+  <path class="flow" d="M755,80 L775,80"/>
+  <path class="flow" d="M755,160 L775,160"/>
+  <path class="flow" d="M755,240 L775,240"/>
+  <path class="flow" d="M755,320 L775,320"/>
+  <path class="bus" d="M775,80 L775,320"/>
+  <path class="flow" d="M775,200 L796,200" marker-end="url(#arrow)"/>
+
+  <rect class="dark" x="800" y="150" width="140" height="100" rx="10"/>
+  <text class="h-inv" x="870" y="182" text-anchor="middle">Camera pose</text>
+  <text class="s-inv" x="870" y="204" text-anchor="middle">position x, y, z</text>
+  <text class="s-inv" x="870" y="221" text-anchor="middle">+ quaternion</text>
+  <text class="s-inv" x="870" y="238" text-anchor="middle">w, x, y, z</text>
+
+  <text class="note" x="480" y="380" text-anchor="middle">Loss for all models: position MSE + β · normalized quaternion error</text>
+</svg>
