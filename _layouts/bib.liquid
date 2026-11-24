@@ -306,7 +306,7 @@
     {% if pd %}
       <div class="expand-panel" id="{{ pd_panel_id }}">
         <div class="expand-panel-inner"><div class="paper-detail">
-          {% if pd.question %}<p class="paper-question">{{ pd.question }}</p>{% endif %}
+          {% if pd.questions %}<div class="paper-question">{{ pd.questions | markdownify }}</div>{% endif %}
           {% if pd.figure %}
             <figure class="project-figure">
               <a href="{{ pd.figure | relative_url }}" target="_blank" rel="noopener" title="Open full size">

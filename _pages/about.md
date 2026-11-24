@@ -27,9 +27,9 @@ latest_posts:
   enabled: false
 ---
 
-I am an M.S. student in Management Information Systems at the Graduate School of Business, Seoul National University, advised by Prof. Wooje Cho. My research examines how firms' IT and interorganizational relationships shape their cybersecurity risk and value. My current work asks when strategic alliances, and R&D alliances in particular, affect firms' data breach risk.
+I am an M.S. student in Management Information Systems at the Graduate School of Business, Seoul National University, advised by <a href="https://gsb.snu.ac.kr/en/faculty?major=1&idx=2921" target="_blank" rel="noopener">Prof. Wooje Cho</a>. My research examines how digital connectivity and interorganizational relationships shape both value and information risk, spanning firm-level IT strategy and cybersecurity as well as user behavior across digital platforms. My current work investigates how newly formed non-equity strategic alliances, and R&D alliances in particular, relate to firms' data breach risk, alongside studies on cross-app usage dynamics across mobile platforms.
 
-What I enjoy most is measurement: turning unstructured data into variables for constructs that are hard to observe directly. My undergraduate training in software alongside business administration lets me build these measures myself, such as using LLMs to match patent assignee records to firm names and quantifying firms' digital activity from the text of their annual reports, and then test them with econometric methods for observational data.
+What I enjoy most is measurement: turning unstructured data into variables for constructs that are hard to observe directly. My undergraduate training in software alongside business administration lets me build these measures myself, such as using LLMs to match patent assignee records to firm names and quantifying firms' digital activity from annual report text, and then test them using empirical econometrics and causal inference methods.
 
 <div class="research-interests">
   <h2 class="research-interests-title">Research Interests</h2>
